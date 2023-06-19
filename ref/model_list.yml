@@ -1,0 +1,3 @@
+model_list:
+  max_length_75: 'Muennighoff/SGPT-125M-weightedmean-nli-bitfit'
+  max_length_300: 'Muennighoff/SGPT-125M-weightedmean-msmarco-specb-bitfit'

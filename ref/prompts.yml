@@ -1,0 +1,3 @@
+content: 'Given the following statements as context: {context} Please answer the following question: {question}'
+summarization: 'Please summarize the following excerpts from a reference material: {context}'
+summarization_excerpt: 'Given the following excerpts from a reference material: {context} Please summarize the following topic: {question}'
