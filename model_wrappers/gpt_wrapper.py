@@ -1,7 +1,7 @@
 import openai
 import os
 from typing import Union
-openai.api_key = os.getenv("OPENAI_API_KEY")
+openai.api_key = os.getenv('OPENAI_API_KEY')
 
 
 class GPTWrapper:
@@ -10,7 +10,7 @@ class GPTWrapper:
             model: str = 'gpt-3.5-turbo'
     ):
         self._model         = model
-        self._message_list  = []
+        self._message_list  = [{'role': 'system', 'content': 'You are a helpful assistant.'}]
 
     def _get_input_formatted(self, input_str: str, use_previous_results: bool = False):
         input_formatted = {'role': 'user', 'content': input_str}
@@ -26,7 +26,7 @@ class GPTWrapper:
             use_previous_results: bool = False,
             return_full_response: bool = False
     ):
-        openai.api_key = os.getenv("OPENAI_API_KEY")
+        openai.api_key = os.getenv('OPENAI_API_KEY')
         message_input = self._get_input_formatted(input_str=input_str, use_previous_results=use_previous_results)
         response = openai.ChatCompletion.create(
             model=self._model,
@@ -34,11 +34,12 @@ class GPTWrapper:
             temperature=temperature,
         )
         response_str = response['choices'][0]['message']['content']
-        self._message_list.append({'role': 'system', 'content': response_str})
+        self._message_list.append({'role': 'assistant', 'content': response_str})
         return response if return_full_response else response_str
 
     def clear_cache(self):
         self._message_list.clear()
+        self._message_list.append({'role': 'system', 'content': 'You are a helpful assistant.'})
 
     def get_previous_messages(self):
         return self._message_list
