@@ -1,8 +1,8 @@
 import argparse
-from vectordb.vector_db import VectorDB
 from embeddings.sgpt_embedder import SGPTEmbedder
-from misc.file_fns import load_pdf, read_yaml
 from model_wrappers.gpt_wrapper import GPTWrapper
+from misc.file_fns import load_pdf, read_yaml
+from vectordb.vector_db import VectorDB
 
 
 if __name__ == '__main__':
