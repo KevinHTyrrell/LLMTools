@@ -79,12 +79,3 @@ class VectorDB:
         for i in range(len(ids)):
             internal_id = self._id_id_map[ids[i]]
             self._id_metadata_map[internal_id] = metadata[i]
-
-# n_dims = 768
-# n_vectors = 100
-# vector_content = np.random.random(n_vectors * n_dims)
-# vector_reshaped = np.reshape(vector_content, newshape=(-1, n_dims))
-# metadata_list = np.arange(len(vector_reshaped)).astype(str)
-# index = VectorDB(n_dims)
-# index.add_vectors(vectors=vector_reshaped, metadata=metadata_list.tolist())
-# output = index.get_neighbors(vector_reshaped[0], return_metadata=True)
