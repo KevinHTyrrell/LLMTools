@@ -7,7 +7,7 @@ from vectordb.vector_db import VectorDB
 
 if __name__ == '__main__':
     embedder = SGPTEmbedder()
-    gpt_wrapper = GPTWrapper()
+    gpt_wrapper = GPTWrapper(model='gpt-3.5-turbo')
     parser = argparse.ArgumentParser()
     parser.add_argument('--pdf_filepath', type=str)
     parser.add_argument('--prompt_type', type=str, default='summarization_excerpt')
