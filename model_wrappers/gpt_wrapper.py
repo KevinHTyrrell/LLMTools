@@ -1,16 +1,13 @@
 import openai
 import os
 from typing import Union
+from base_wrapper import BaseWrapper
 openai.api_key = os.getenv('OPENAI_API_KEY')
 
 
-class GPTWrapper:
-    def __init__(
-            self,
-            model: str = 'gpt-3.5-turbo'
-    ):
-        self._model         = model
-        self._message_list  = [{'role': 'system', 'content': 'You are a helpful assistant.'}]
+class GPTWrapper(BaseWrapper):
+    def _config(self):
+        self._message_list.append({'role': 'system', 'content': 'You are a helpful assistant.'})
 
     def _get_input_formatted(self, input_str: str, use_previous_results: bool = False):
         input_formatted = {'role': 'user', 'content': input_str}
@@ -37,9 +34,3 @@ class GPTWrapper:
         self._message_list.append({'role': 'assistant', 'content': response_str})
         return response if return_full_response else response_str
 
-    def clear_cache(self):
-        self._message_list.clear()
-        self._message_list.append({'role': 'system', 'content': 'You are a helpful assistant.'})
-
-    def get_previous_messages(self):
-        return self._message_list
