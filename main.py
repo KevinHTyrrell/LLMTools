@@ -1,13 +1,13 @@
 import argparse
 from embeddings.sgpt_embedder import SGPTEmbedder
-from model_wrappers.gpt_wrapper import GPTWrapper
+from model_wrappers.gpt import GPT
 from misc.file_fns import load_pdf, read_yaml
 from vectordb.vector_db import VectorDB
 
 
 if __name__ == '__main__':
     embedder = SGPTEmbedder()
-    gpt_wrapper = GPTWrapper(model='gpt-3.5-turbo')
+    gpt_wrapper = GPT(model='gpt-3.5-turbo')
     parser = argparse.ArgumentParser()
     parser.add_argument('--pdf_filepath', type=str)
     parser.add_argument('--prompt_type', type=str, default='summarization_excerpt')
