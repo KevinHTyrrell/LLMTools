@@ -1,8 +1,3 @@
-import numpy as np
-import pandas as pd
-from abc import ABC
-
-
 class BaseWrapper:
     def __init__(
             self,
@@ -10,9 +5,11 @@ class BaseWrapper:
     ):
         self._model = model
         self._message_list = []
+        self._config()
 
     def _config(self):
         NotImplementedError('NO CONFIGURATION SET')
+
 
     def clear_cache(self):
         self._message_list.clear()
