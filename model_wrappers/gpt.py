@@ -1,11 +1,11 @@
 import openai
 import os
 from typing import Union
-from base_wrapper import BaseWrapper
+from base import Base
 openai.api_key = os.getenv('OPENAI_API_KEY')
 
 
-class GPTWrapper(BaseWrapper):
+class GPT(Base):
     def _config(self):
         self._message_list.append({'role': 'system', 'content': 'You are a helpful assistant.'})
 

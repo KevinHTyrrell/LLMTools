@@ -1,4 +1,4 @@
-class BaseWrapper:
+class Base:
     def __init__(
             self,
             model: str,
