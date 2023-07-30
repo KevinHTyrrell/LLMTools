@@ -21,7 +21,7 @@ class VectorDB:
             self,
             vectors: np.ndarray,
             ids: Union[List, np.ndarray, pd.Series] = None,
-            metadata: List[str] = None
+            metadata: List[Union[dict, str, tuple]] = None
     ):
         if ids is not None:
             assert len(vectors) == len(ids), 'IDS AND VECTORS MUST BE 1 TO 1'
