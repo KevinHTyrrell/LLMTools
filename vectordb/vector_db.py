@@ -6,9 +6,10 @@ from typing import List, Union
 class VectorDB:
     def __init__(
             self,
-            n_dims: int
+            n_dims: int,
+            embedder = None
     ):
-        self._n_dims                    = n_dims,
+        self._n_dims                    = n_dims
         self._index                     = faiss.IndexIDMap(faiss.IndexFlatL2(n_dims))
         self._curr_id                   = 0
         self._index_built               = False
@@ -16,6 +17,7 @@ class VectorDB:
         self._internal_external_id_map  = {}
         self._id_vector_map             = {}
         self._id_metadata_map           = {}
+        self._embedder                  = embedder
 
     def add_vectors(
             self,
@@ -50,12 +52,16 @@ class VectorDB:
 
     def get_neighbors(
             self,
+            string: str = None,
             vector = None,
             id = None,
             k: int = 10,
             return_metadata: bool = False
     ):
-        assert (vector is not None) or (id is not None), 'MUST PROVIDE VECTOR OR VECTOR_ID'
+        assert (string is not None) or (vector is not None) or (id is not None), 'MUST PROVIDE VECTOR OR VECTOR_ID'
+        if string is not None:
+            assert self._embedder is not None, 'MUST PROVIDE AN EMBEDDER'
+            vector = self._embedder.encode(string)
         if vector is None:
             internal_id = self._external_internal_id_map[id]
             vector = self._id_vector_map[internal_id]
