@@ -89,3 +89,6 @@ class VectorDB:
         for i in range(len(ids)):
             internal_id = self._external_internal_id_map[ids[i]]
             self._id_metadata_map[internal_id] = metadata[i]
+
+    def has_embedding_fn(self):
+        return self._embedder is not None
